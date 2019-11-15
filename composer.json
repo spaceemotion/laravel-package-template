@@ -11,6 +11,9 @@
             "email": ":author_mail"
         }
     ],
+    "support": {
+        "issues": "https://github.com/:author_name/:package_name/issues"
+    },
     "require": {
         "php" : "^7.3"
     },
