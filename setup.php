@@ -79,20 +79,12 @@ function getInput(string $label, ?string $default = ''): string {
     return $default;
 }
 
-function replaceInFolder(string $directory, array $vars) {
-    static $except = ['.', '..', '.git', '.idea'];
+function replaceInFolder(array $vars) {
+    $files = rtrim(exec('git ls-tree --full-tree -r --full-name --name-only -z HEAD'), "\x00");
+    $files = explode("\x00", $files);
 
-    $offset = strlen(__DIR__);
-
-    foreach (array_diff(scandir($directory, SCANDIR_SORT_NONE), $except) as $entry) {
-        $path = $directory . DIRECTORY_SEPARATOR . $entry;
-
-        if (is_dir($path)) {
-            replaceInFolder($path, $vars);
-            continue;
-        }
-
-        echo '  ' . substr($path, $offset) . PHP_EOL;
+    foreach ($files as $entry) {
+        echo "  ./$entry" . PHP_EOL;
     }
 }
 
@@ -135,7 +127,7 @@ function runWizard() {
     echo PHP_EOL;
     echo '- Replacing variables:' . PHP_EOL;
 
-    replaceInFolder(__DIR__, $vars);
+    replaceInFolder($vars);
 
     echo PHP_EOL . 'Don\'t forget to add the codecov token!' . PHP_EOL;
 
