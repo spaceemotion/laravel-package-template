@@ -110,6 +110,7 @@ function runWizard() {
     $vars['author_mail'] = getInput('Author email address', $gitSettings['email']);
     $vars['package_name'] = getInput('Github repository name', $gitSettings['repo']);
     $vars['display_name'] = getInput('Display name', getDisplayName($vars['package_name']));
+    $vars['composer_tags'] = getInput('List of tags (separated by comma)', 'laravel');
 
     echo PHP_EOL;
 
@@ -122,6 +123,8 @@ function runWizard() {
     if (strtolower(getInput('Are the above settings ok? (y/N)')) !== 'y') {
         exit(1);
     }
+
+    $vars['composer_tags'] = implode('","', array_map('trim', explode(',', $vars['composer_tags'])));
 
     echo PHP_EOL;
     echo '- Replacing variables:' . PHP_EOL;
