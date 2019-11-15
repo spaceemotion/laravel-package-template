@@ -15,12 +15,25 @@
         "issues": "https://github.com/:author_name/:package_name/issues"
     },
     "require": {
-        "php" : "^7.3"
+        "php": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
     },
     "autoload": {
         "psr-4": {
             ":vendor_name\\:vendor_package\\": "src"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            ":vendor_name\\:vendor_package\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "coverage:html": "phpdbg -qrr vendor/phpunit/phpunit/phpunit --coverage-html build/coverage-report",
+        "coverage:clover": "phpdbg -qrr vendor/phpunit/phpunit/phpunit --coverage-clover build/coverage.xml",
     },
     "config": {
         "sort-packages": true
