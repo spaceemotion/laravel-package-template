@@ -9,6 +9,31 @@
 // it's also not as pretty it can be with fancy libraries.
 //
 
+/** Detect as many variables from the git repository as possible. */
+function detectGitSettings(): array {
+    $name = '';
+    $repo = '';
+
+    echo '- Detecting git configuration for smart defaults...';
+
+    $output = exec('git remote get-url origin', $lines, $return);
+
+    if ($return !== 0) {
+        throw new RuntimeException('Could execute git command');
+    }
+
+    if (preg_match('/github\.com[\/:](\w+)\/([^.\/]+)/i', $output, $matches) !== false) {
+        [, $name, $repo] = $matches;
+        echo 'OK';
+    } else {
+        echo 'NO MATCH';
+    }
+
+    echo PHP_EOL;
+
+    return ['name' => $name, 'repo' => $repo];
+}
+
 /** Grabs user input and allows script cancellation */
 function getInput(string $label, bool $required = false, ?string $default = ''): string {
     echo "> $label"
@@ -59,14 +84,15 @@ function runWizard() {
     echo '(you can use CTRL+C to stop at any time).'.PHP_EOL;
     echo PHP_EOL;
 
+    $gitSettings = detectGitSettings();
     $vars = [
         'date_year' => date('Y'),
     ];
 
     echo PHP_EOL;
 
-    $vars['author_name'] = getInput('Github user or organization name', true);
-    $vars['package_name'] = getInput('Github repository name', true);
+    $vars['author_name'] = getInput('Github user or organization name', true, $gitSettings['name']);
+    $vars['package_name'] = getInput('Github repository name', true, $gitSettings['repo']);
     $vars['display_name'] = getInput('Display name', true);
 
     echo PHP_EOL;
