@@ -23,6 +23,12 @@ composer require :author_name/:package_name
 ``` php
 ```
 
+### Testing
+
+``` bash
+composer test
+```
+
 ### Changelog
 
 Please look at [the releases](https://github.com/:author_name/:package_name/releases) for more information on what has changed recently.
