@@ -149,6 +149,7 @@ function runWizard()
         __DIR__ . '/README.md',
         strstr(file_get_contents(__DIR__ . '/README.md'), '<!--README_START-->', false),
     );
+    unlink(__FILE__);
 
     echo PHP_EOL . 'Don\'t forget to add the codecov token!' . PHP_EOL;
 
