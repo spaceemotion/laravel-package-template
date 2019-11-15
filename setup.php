@@ -134,6 +134,7 @@ function runWizard()
     echo '- Replacing variables:' . PHP_EOL;
 
     replaceInFolder($vars);
+    rename(__DIR__ . '/.github/workflows/ci.yml.dist', __DIR__ . '/.github/workflows/ci.yml');
 
     echo PHP_EOL . 'Don\'t forget to add the codecov token!' . PHP_EOL;
 
