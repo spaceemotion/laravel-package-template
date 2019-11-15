@@ -112,6 +112,7 @@ function runWizard() {
     $vars['author_name'] = getInput('Github user or organization name', $gitSettings['name']);
     $vars['author_mail'] = getInput('Author email address', $gitSettings['email']);
     $vars['package_name'] = getInput('Github repository name', $gitSettings['repo']);
+    $vars['package_description'] = getInput('Project description (short sentence)');
     $vars['display_name'] = getInput('Display name', getDisplayName($vars['package_name']));
     $vars['composer_tags'] = getInput('List of tags (separated by comma)', 'laravel');
     $vars['vendor_name'] = getInput('Composer Package vendor', getTitleCase($vars['author_name']));
