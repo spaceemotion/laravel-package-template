@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            ":vendor_name\\:vendor_package\\": "src"
+            "_vendor_name_\\_vendor_package_\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            ":vendor_name\\:vendor_package\\Tests\\": "tests"
+            "_vendor_name_\\_vendor_package_\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -56,5 +56,12 @@
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "_vendor_name_\\_vendor_package_\\ServiceProvider"
+            ]
+        }
     }
 }
