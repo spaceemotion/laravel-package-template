@@ -1,15 +1,15 @@
 #!/bin/php
 <?php
 
-//
+declare(strict_types=1);
+
 // Since this is a PHP repository template, using PHP for a wizard instead of
 // bash makes reading it a bit easier and more cross-platform compatible.
 //
 // Since this is a one-time script without any composer dependencies,
 // it's also not as pretty it can be with fancy libraries.
-//
-
-function execOrFail(string $command): string {
+function execOrFail(string $command): string
+{
     $output = exec($command, $lines, $return);
 
     if ($return !== 0) {
@@ -20,7 +20,8 @@ function execOrFail(string $command): string {
 }
 
 /** Detect as many variables from the git repository as possible. */
-function detectGitSettings(): array {
+function detectGitSettings(): array
+{
     $name = '';
     $repo = '';
 
@@ -43,18 +44,21 @@ function detectGitSettings(): array {
     return ['name' => $name, 'repo' => $repo, 'email' => $mail];
 }
 
-function getDisplayName(string $str): string {
+function getDisplayName(string $str): string
+{
     $str = ucwords(preg_replace('/[^a-z]+/i', ' ', $str));
 
     return trim(preg_replace('/\s{2,}/', '', $str));
 }
 
-function getTitleCase(string $str): string {
+function getTitleCase(string $str): string
+{
     return str_replace(' ', '', getDisplayName($str));
 }
 
 /** Grabs user input and allows script cancellation */
-function getInput(string $label, ?string $default = ''): string {
+function getInput(string $label, ?string $default = ''): string
+{
     echo "> $label"
         . ($default !== '' ? " [default: $default]" : '')
         . ': ';
@@ -79,7 +83,8 @@ function getInput(string $label, ?string $default = ''): string {
     return $default;
 }
 
-function replaceInFolder(array $vars) {
+function replaceInFolder(array $vars)
+{
     $files = rtrim(exec('git ls-tree --full-tree -r --full-name --name-only -z HEAD'), "\x00");
     $files = explode("\x00", $files);
 
@@ -88,10 +93,11 @@ function replaceInFolder(array $vars) {
     }
 }
 
-function runWizard() {
-    echo 'Welcome to the setup assistant of this package template.'.PHP_EOL;
-    echo 'This wizard will ask a few questions to fill in the placeholders.'.PHP_EOL;
-    echo '(you can use CTRL+C to stop at any time).'.PHP_EOL;
+function runWizard()
+{
+    echo 'Welcome to the setup assistant of this package template.' . PHP_EOL;
+    echo 'This wizard will ask a few questions to fill in the placeholders.' . PHP_EOL;
+    echo '(you can use CTRL+C to stop at any time).' . PHP_EOL;
     echo PHP_EOL;
 
     $gitSettings = detectGitSettings();
