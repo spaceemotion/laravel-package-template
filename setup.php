@@ -99,7 +99,14 @@ function replaceInFolder(array $vars)
 
     foreach ($files as $entry) {
         echo "  ./$entry" . PHP_EOL;
-        file_put_contents($entry, strtr(file_get_contents($entry), $patterns));
+
+        $newFileName = strtr($entry, $patterns);
+
+        file_put_contents($newFileName, strtr(file_get_contents($entry), $patterns));
+
+        if ($newFileName !== $entry) {
+            unlink($entry);
+        }
     }
 }
 
