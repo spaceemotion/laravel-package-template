@@ -17,3 +17,5 @@ jobs:
               run: composer lint
             - name: Run tests
               run: composer coverage:clover
+            - name: Upload coverage
+              run: bash <(curl -s https://codecov.io/bash) -ct ${{ secrets.CODECOV_TOKEN }}

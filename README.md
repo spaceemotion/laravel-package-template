@@ -7,6 +7,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:author_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:author_name/:package_name)
 [![Total Downloads](https://img.shields.io/packagist/dt/:author_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:author_name/:package_name)
 [![Actions Status](https://github.com/:author_name/:package_name/workflows/CI/badge.svg)](https://github.com/:author_name/:package_name/actions)
+[![CodeCov Status](https://codecov.io/gh/:author_name/:package_name/branch/master/graph/badge.svg)(https://codecov.io/gh/:author_name/:package_name)]
 
 :package_description
 <!--This is where the description goes. Try to limit it to a paragraph or two. Consider adding a small, easy to understand example.-->

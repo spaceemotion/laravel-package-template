@@ -137,6 +137,8 @@ function runWizard() {
 
     replaceInFolder(__DIR__, $vars);
 
+    echo PHP_EOL . 'Don\'t forget to add the codecov token!' . PHP_EOL;
+
     echo PHP_EOL . 'OK.' . PHP_EOL;
 }
 
