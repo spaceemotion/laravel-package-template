@@ -44,10 +44,13 @@ function detectGitSettings(): array {
 }
 
 function getDisplayName(string $str): string {
-    $str = preg_replace('/[^a-z]+/i', ' ', $str);
-    $str = ucwords($str);
+    $str = ucwords(preg_replace('/[^a-z]+/i', ' ', $str));
 
     return trim(preg_replace('/\s{2,}/', '', $str));
+}
+
+function getTitleCase(string $str): string {
+    return str_replace(' ', '', getDisplayName($str));
 }
 
 /** Grabs user input and allows script cancellation */
@@ -111,6 +114,8 @@ function runWizard() {
     $vars['package_name'] = getInput('Github repository name', $gitSettings['repo']);
     $vars['display_name'] = getInput('Display name', getDisplayName($vars['package_name']));
     $vars['composer_tags'] = getInput('List of tags (separated by comma)', 'laravel');
+    $vars['vendor_name'] = getInput('Composer Package vendor', getTitleCase($vars['author_name']));
+    $vars['vendor_package'] = getInput('Composer Package vendor', getTitleCase($vars['package_name']));
 
     echo PHP_EOL;
 
