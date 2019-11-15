@@ -2,6 +2,8 @@
     <strong>To get started, execute <code>php setup.php</code> on your CLI</strong>
 </p>
 
+<!--README_START-->
+
 # :display_name
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:author_name/:package_name.svg?style=flat-square)](https://packagist.org/packages/:author_name/:package_name)

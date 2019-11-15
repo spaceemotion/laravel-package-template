@@ -85,11 +85,21 @@ function getInput(string $label, ?string $default = ''): string
 
 function replaceInFolder(array $vars)
 {
+    // Allow different variants of the variables
+    $patterns = [];
+
+    foreach ($vars as $key => $value) {
+        $patterns["_{$key}_"] = $value;
+        $patterns[":{$key}"] = $value;
+    }
+
+    // Grab files from git so we get a clean list instead of ignores folders and the like
     $files = rtrim(exec('git ls-tree --full-tree -r --full-name --name-only -z HEAD'), "\x00");
     $files = explode("\x00", $files);
 
     foreach ($files as $entry) {
         echo "  ./$entry" . PHP_EOL;
+        file_put_contents($entry, strtr(file_get_contents($entry), $patterns));
     }
 }
 
@@ -135,6 +145,10 @@ function runWizard()
 
     replaceInFolder($vars);
     rename(__DIR__ . '/.github/workflows/ci.yml.dist', __DIR__ . '/.github/workflows/ci.yml');
+    file_put_contents(
+        __DIR__ . '/README.md',
+        strstr(file_get_contents(__DIR__ . '/README.md'), '<!--README_START-->', false),
+    );
 
     echo PHP_EOL . 'Don\'t forget to add the codecov token!' . PHP_EOL;
 
