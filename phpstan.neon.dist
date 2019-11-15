@@ -8,6 +8,6 @@ includes:
 parameters:
     level: max
     paths:
-        - app
         - config
+        - src
         - tests

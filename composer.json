@@ -45,7 +45,7 @@
         "coverage:html": "phpdbg -qrr vendor/phpunit/phpunit/phpunit --coverage-html build/coverage-report",
         "lint:style": "phpcs",
         "lint:analyse": "phpstan analyse",
-        "lint:mess": "phpmd app,config,tests text phpmd.xml",
+        "lint:mess": "phpmd config,src,tests text phpmd.xml",
         "lint": [
             "@lint:style",
             "@lint:mess",
