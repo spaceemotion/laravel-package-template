@@ -9,20 +9,25 @@
 // it's also not as pretty it can be with fancy libraries.
 //
 
+function execOrFail(string $command): string {
+    $output = exec($command, $lines, $return);
+
+    if ($return !== 0) {
+        throw new RuntimeException("Could execute command: '$command' (exit code $return)");
+    }
+
+    return $output;
+}
+
 /** Detect as many variables from the git repository as possible. */
 function detectGitSettings(): array {
     $name = '';
     $repo = '';
 
-    echo '- Detecting git configuration for smart defaults...';
+    echo '- Detecting git remote URL...';
+    $origin = execOrFail('git remote get-url origin');
 
-    $output = exec('git remote get-url origin', $lines, $return);
-
-    if ($return !== 0) {
-        throw new RuntimeException('Could execute git command');
-    }
-
-    if (preg_match('/github\.com[\/:](\w+)\/([^.\/]+)/i', $output, $matches) !== false) {
+    if (preg_match('/github\.com[\/:](\w+)\/([^.\/]+)/i', $origin, $matches) !== false) {
         [, $name, $repo] = $matches;
         echo 'OK';
     } else {
