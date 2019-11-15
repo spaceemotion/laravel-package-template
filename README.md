@@ -1,5 +1,5 @@
 <p align="center">
-    <strong>To get started, execute <code>php setup.php</code> on you CLI</strong>
+    <strong>To get started, execute <code>php setup.php</code> on your CLI</strong>
 </p>
 
 # :display_name
