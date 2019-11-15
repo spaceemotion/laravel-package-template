@@ -104,7 +104,7 @@ function runWizard() {
     echo PHP_EOL;
 
     foreach ($vars as $key => $value) {
-        echo "  $key:\t$value" . PHP_EOL;
+        printf('  %-20.20s %s' . PHP_EOL, $key, $value);
     }
 
     echo PHP_EOL;
