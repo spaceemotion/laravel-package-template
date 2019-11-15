@@ -34,6 +34,13 @@ function detectGitSettings(): array {
     return ['name' => $name, 'repo' => $repo];
 }
 
+function getDisplayName(string $str): string {
+    $str = preg_replace('/[^a-z]+/i', ' ', $str);
+    $str = ucwords($str);
+
+    return trim(preg_replace('/\s{2,}/', '', $str));
+}
+
 /** Grabs user input and allows script cancellation */
 function getInput(string $label, bool $required = false, ?string $default = ''): string {
     echo "> $label"
@@ -93,7 +100,7 @@ function runWizard() {
 
     $vars['author_name'] = getInput('Github user or organization name', true, $gitSettings['name']);
     $vars['package_name'] = getInput('Github repository name', true, $gitSettings['repo']);
-    $vars['display_name'] = getInput('Display name', true);
+    $vars['display_name'] = getInput('Display name', true, getDisplayName($vars['package_name']));
 
     echo PHP_EOL;
 
