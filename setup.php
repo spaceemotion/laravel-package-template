@@ -42,9 +42,8 @@ function getDisplayName(string $str): string {
 }
 
 /** Grabs user input and allows script cancellation */
-function getInput(string $label, bool $required = false, ?string $default = ''): string {
+function getInput(string $label, ?string $default = ''): string {
     echo "> $label"
-        . ($required ? ' (required)' : '')
         . ($default !== '' ? " [default: $default]" : '')
         . ': ';
 
@@ -57,12 +56,12 @@ function getInput(string $label, bool $required = false, ?string $default = ''):
 
     $input = trim($input);
 
-    if (!$required || $input !== '') {
+    if ($input !== '') {
         return $input;
     }
 
     if ($default === '') {
-        return getInput($label, true);
+        return getInput($label, $default);
     }
 
     return $default;
@@ -98,9 +97,9 @@ function runWizard() {
 
     echo PHP_EOL;
 
-    $vars['author_name'] = getInput('Github user or organization name', true, $gitSettings['name']);
-    $vars['package_name'] = getInput('Github repository name', true, $gitSettings['repo']);
-    $vars['display_name'] = getInput('Display name', true, getDisplayName($vars['package_name']));
+    $vars['author_name'] = getInput('Github user or organization name', $gitSettings['name']);
+    $vars['package_name'] = getInput('Github repository name', $gitSettings['repo']);
+    $vars['display_name'] = getInput('Display name', getDisplayName($vars['package_name']));
 
     echo PHP_EOL;
 
