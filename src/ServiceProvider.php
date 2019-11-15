@@ -11,7 +11,7 @@ class ServiceProvider extends LaravelServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../config/_package_name_.php' => config_path('.php'),
+            __DIR__ . '/../config/_package_name_.php' => config_path('_package_name_.php'),
         ]);
     }
 }
