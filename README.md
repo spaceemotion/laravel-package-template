@@ -1,4 +1,4 @@
-<p align="center" style="background: rgba(255, 2450, 200,0.25); padding: 10px">
+<p align="center">
     <strong>To get started, execute <code>php setup.php</code> on you CLI</strong>
 </p>
 
