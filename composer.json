@@ -1,0 +1,25 @@
+{
+    "name": ":author_name/:package_name",
+    "type": "library",
+    "description": ":package_description",
+    "keywords": [":composer_tags"],
+    "homepage": "https://github.com/:author_name/:package_name",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": ":author_name",
+            "email": ":author_mail"
+        }
+    ],
+    "require": {
+        "php" : "^7.3"
+    },
+    "autoload": {
+        "psr-4": {
+            ":vendor_name\\:vendor_package\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
