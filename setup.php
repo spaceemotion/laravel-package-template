@@ -36,7 +36,11 @@ function detectGitSettings(): array {
 
     echo PHP_EOL;
 
-    return ['name' => $name, 'repo' => $repo];
+    echo '- Detecting author email...';
+    $mail = execOrFail('git config user.email || echo');
+    echo 'OK' . PHP_EOL;
+
+    return ['name' => $name, 'repo' => $repo, 'email' => $mail];
 }
 
 function getDisplayName(string $str): string {
@@ -103,6 +107,7 @@ function runWizard() {
     echo PHP_EOL;
 
     $vars['author_name'] = getInput('Github user or organization name', $gitSettings['name']);
+    $vars['author_mail'] = getInput('Author email address', $gitSettings['email']);
     $vars['package_name'] = getInput('Github repository name', $gitSettings['repo']);
     $vars['display_name'] = getInput('Display name', getDisplayName($vars['package_name']));
 
