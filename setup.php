@@ -37,7 +37,7 @@ function detectGitSettings(): array {
     echo PHP_EOL;
 
     echo '- Detecting author email...';
-    $mail = execOrFail('git config user.email || echo');
+    $mail = execOrFail('git config user.email || git config --global user.email || echo');
     echo 'OK' . PHP_EOL;
 
     return ['name' => $name, 'repo' => $repo, 'email' => $mail];
